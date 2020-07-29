@@ -5,7 +5,7 @@ provider "azurerm" {
 #create resource group
 resource "azurerm_resource_group" "rg" {
     name     = "rg-MyFirstTerraform"
-    location = "westus"
+    location = "north europe"
 }
 
 #Create Storage Account
