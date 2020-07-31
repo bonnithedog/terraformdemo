@@ -4,7 +4,7 @@ provider "azurerm" {
 
 
 resource "random_id" "rg_name" {
-  byte_length = 2
+  byte_length = 8
 }
 
 resource "azurerm_network_security_group" "nsg1" {
