@@ -1,9 +1,9 @@
 
 
 #create resource group
-module "resource_group" "example" {
+module "resource_group" {
     source    = "./modules/rg"
-    #name    = "demo"
-    #location = "westus"
+    rgname    = "demo"
+    location = "westus"
 }
 
