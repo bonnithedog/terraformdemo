@@ -7,7 +7,7 @@ resource "random_id" "rg_name" {
 }
 
 resource "azurerm_resource_group" "env" {
-  name     = var.env-"${random_id.rg_name.hex}-rg"
+  name     = "var.env -${random_id.rg_name.hex}-rg"
   location = var.location
 }
 
