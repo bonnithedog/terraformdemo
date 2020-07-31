@@ -6,7 +6,7 @@ provider "azurerm" {
 #create resource group
 module "resource_group" "rg" {
     source    = "./modules/rg"
-    #rgname    = "demo"
+    name    = "demo"
     location = "westus"
 }
 
