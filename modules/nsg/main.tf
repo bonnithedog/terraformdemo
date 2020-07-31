@@ -9,8 +9,8 @@ resource "random_id" "rg_name" {
 
 resource "azurerm_network_security_group" "nsg1" {
   name                = "test-${random_id.rg_name.hex}-nsg"
-  resource_group_name = var.rgname.name
-  location            = var.rgname.location
+  resource_group_name = var.rgname
+  location            = var.location
 }
 
 
@@ -21,14 +21,14 @@ resource "random_id" "rg_name" {
 
 resource "azurerm_network_security_group" "nsg1" {
   name                = "test-${random_id.rg_name.hex}-nsg"
-  resource_group_name = avar.rgname.name
-  location            = var.rgname.location
+  resource_group_name = var.rgname
+  location            = var.location
 }
 
 resource "azurerm_route_table" "rt1" {
-  location            = var.rgname.location
+  location            = var.location
   name                = "test-${random_id.rg_name.hex}-rt"
-  resource_group_name = avar.rgname.name
+  resource_group_name = var.rgname
 }
 
 
