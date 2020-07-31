@@ -6,10 +6,11 @@ resource "random_id" "rg_name" {
   byte_length = 8
 }
 
-resource "azurerm_resource_group" "test" {
-  name     = "test-${random_id.rg_name.hex}-rg"
+resource "azurerm_resource_group" "env" {
+  name     = var.env-"${random_id.rg_name.hex}-rg"
   location = var.location
 }
+
 
 resource "azurerm_network_security_group" "nsg1" {
   name                = "test-${random_id.rg_name.hex}-nsg"
