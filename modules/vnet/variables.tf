@@ -1,6 +1,6 @@
 variable "vnet_name" {
   description = "Name of the vnet to create"
-  default     = "acctvnet"
+  default     = "test"
 }
 
 variable "resource_group_name" {
