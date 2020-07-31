@@ -1,47 +1,48 @@
-
 provider "azurerm" {
   features {}
 }
 
-#Azure Generic vNet Module
-data azurerm_resource_group "vnet" {
-  name = var.resource_group_name
+resource "random_id" "rg_name" {
+  byte_length = 8
 }
 
-resource azurerm_virtual_network "vnet" {
-  name                = var.vnet_name
-  resource_group_name = data.azurerm_resource_group.vnet.name
-  location            = data.azurerm_resource_group.vnet.location
-  address_space       = var.address_space
-  dns_servers         = var.dns_servers
-  tags                = var.tags
+resource "azurerm_resource_group" "test" {
+  name     = "test-${random_id.rg_name.hex}-rg"
+  location = var.location
 }
 
-resource "azurerm_subnet" "subnet" {
-  count                = length(var.subnet_names)
-  name                 = var.subnet_names[count.index]
-  resource_group_name  = data.azurerm_resource_group.vnet.name
-  virtual_network_name = azurerm_virtual_network.vnet.name
-  address_prefixes     = [var.subnet_prefixes[count.index]]
+resource "azurerm_network_security_group" "nsg1" {
+  name                = "test-${random_id.rg_name.hex}-nsg"
+  resource_group_name = azurerm_resource_group.test.name
+  location            = azurerm_resource_group.test.location
 }
 
-data "azurerm_subnet" "import" {
-  for_each             = var.nsg_ids
-  name                 = each.key
-  resource_group_name  = data.azurerm_resource_group.vnet.name
-  virtual_network_name = azurerm_virtual_network.vnet.name
-
-  depends_on = [azurerm_subnet.subnet]
+resource "azurerm_route_table" "rt1" {
+  location            = azurerm_resource_group.test.location
+  name                = "test-${random_id.rg_name.hex}-rt"
+  resource_group_name = azurerm_resource_group.test.name
 }
 
-resource "azurerm_subnet_network_security_group_association" "vnet" {
-  for_each                  = var.nsg_ids
-  subnet_id                 = data.azurerm_subnet.import[each.key].id
-  network_security_group_id = each.value
+module "vnet" {
+  source              = ".modules/vnet/"
+  resource_group_name = azurerm_resource_group.test.name
+  address_space       = ["10.0.0.0/16"]
+  subnet_prefixes     = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
+  subnet_names        = ["subnet1", "subnet2", "subnet3"]
+
+  nsg_ids = {
+    subnet1 = azurerm_network_security_group.nsg1.id
+  }
+
+  route_tables_ids = {
+    subnet1 = azurerm_route_table.rt1.id
+  }
+
+  tags = {
+    environment = "dev"
+    costcenter  = "it"
+  }
 }
 
-resource "azurerm_subnet_route_table_association" "vnet" {
-  for_each       = var.route_tables_ids
-  route_table_id = each.value
-  subnet_id      = data.azurerm_subnet.import[each.key].id
-}
+
+
