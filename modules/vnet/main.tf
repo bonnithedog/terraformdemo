@@ -28,7 +28,7 @@ resource "azurerm_network_security_group" "ssh" {
   name                = "ssh"
   location            = var.location
   #resource_group_name = "${var.resource_group_name}" 
-  resource_group_name = var.rgname
+  resource_group_name = "${var.rgname}" 
 
   security_rule {
     name                       = "test123"
