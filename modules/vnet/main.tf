@@ -31,7 +31,7 @@ resource "azurerm_network_security_group" "ssh" {
   resource_group_name = var.rgname 
 
   security_rule {
-    name                       = "test123"
+    name                       = "SSHinbound"
     priority                   = 100
     direction                  = "Inbound"
     access                     = "Allow"
@@ -41,5 +41,19 @@ resource "azurerm_network_security_group" "ssh" {
     source_address_prefix      = "*"
     destination_address_prefix = "*"
   }
+
+security_rule {
+    name                       = "HTTPSinbound"
+    priority                   = 110
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "443"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+
+
 
 }
