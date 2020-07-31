@@ -11,6 +11,6 @@ variable "envset" {
 
 variable "location" {
     type = string
-    description = "Name environment settings for demo test or prod"
+    description = "Location datasenter"
     default = "northeurope"
 }
