@@ -1,9 +1,9 @@
-#provider "azurerm" {
-#  features {}
-#}
+provider "azurerm" {
+  features {}
+}
 
 
-module "vnet" {
+  module "vnet" {
   source              = "Azure/vnet/azurerm"
   resource_group_name = var.rgname
   address_space       = ["10.0.0.0/16"]
@@ -17,10 +17,10 @@ module "vnet" {
   #}
 
 
-  tags = {
-    environment = "dev"
-    costcenter  = "it"
-  }
+  #tags = {
+  #  environment = "dev"
+  #  costcenter  = "it"
+  #}
 
 
 resource "azurerm_network_security_group" "ssh" {
