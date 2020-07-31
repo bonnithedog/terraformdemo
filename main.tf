@@ -15,8 +15,6 @@ module "network_security_group" {
 }
 
 
-}
-
 
 module "vnet" {
     source    = "./modules/vnet"
