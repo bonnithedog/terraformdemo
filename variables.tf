@@ -6,5 +6,5 @@ variable "location" {
 
 variable "env" {
   description = "Demo Dev Test Stage Prod"
-
+default = "test"
 }
