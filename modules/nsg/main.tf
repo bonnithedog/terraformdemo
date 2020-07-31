@@ -40,7 +40,8 @@ resource "azurerm_route_table" "rt1" {
     environment = "dev"
     costcenter  = "it"
   }
-}
+
+#}
   nsg_ids = {
     subnet1 = azurerm_network_security_group.nsg1.id
   }
