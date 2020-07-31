@@ -27,7 +27,8 @@ resource "azurerm_network_security_group" "ssh" {
   depends_on          = [module.vnet]
   name                = "ssh"
   location            = var.location
-  resource_group_name = "${var.resource_group_name}"
+  #resource_group_name = "${var.resource_group_name}" 
+  resource_group_name = var.rgname
 
   security_rule {
     name                       = "test123"
