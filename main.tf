@@ -27,3 +27,5 @@ module "vnet" {
   nsg_ids = {
     subnet1 = azurerm_network_security_group.nsg1.id
   }
+
+  }
