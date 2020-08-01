@@ -15,6 +15,7 @@ envset
 location
 
 Azure ARM identification mandatory
+
 ARM_CLIENT_ID  
 ARM_SUBSCRIPTION_ID  
 ARM_TENANT_ID  
