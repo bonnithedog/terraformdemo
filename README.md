@@ -20,7 +20,7 @@ ARM_SUBSCRIPTION_ID
 ARM_TENANT_ID  
 ARM_CLIENT_SECRET  
 
-
+```bash
 /terraformdemo
 ├── README.md
 ├── main.tf
@@ -30,3 +30,4 @@ ARM_CLIENT_SECRET
 │       └── variables.tf
 ├── provider.tf
 └── variable.tf
+```
